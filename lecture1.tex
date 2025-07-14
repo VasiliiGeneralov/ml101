@@ -14,6 +14,7 @@
 \pgfplotsset{compat=newest}
 
 \def \MinSize {22}
+\def \TikzScale {0.7}
 
 \newcommand{\mtx}[1]{\boldsymbol{#1}}
 
@@ -137,21 +138,32 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{\secname : \subsecname}
+\begin{frame}[fragile]{\secname : \subsecname}
   \framesubtitle{Регрессия функции}
   \begin{columns}
 
     \begin{column}{0.5\textwidth}
-      \begin{center}
-        \begin{tikzpicture}
-          \begin{axis}
-            \addplot[blue] table[x=X,y=Y,col sep=comma] {output.csv};
-            \addplot[blue,only marks,mark size=1] table[x=X,y=Ynoise,col
-            sep=comma] {output.csv};
-            \addplot[red] table[x=X,y=Ypred,col sep=comma] {output.csv};
-          \end{axis}
-        \end{tikzpicture}
-      \end{center}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}
+          \addplot[blue] table[x=X,y=Y,col sep=comma]
+          {linear_regression_1/output.csv};
+          \addplot[blue,only marks,mark size=1] table[x=X,y=Ynoise,col
+          sep=comma] {linear_regression_1/output.csv};
+          \addplot[red] table[x=X,y=Ypred,col sep=comma]
+          {linear_regression_1/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}
+          \addplot[blue] table[col sep=comma]
+          {linear_regression_1/test_loss.csv};
+          \addplot[red] table[col sep=comma]
+          {linear_regression_1/train_loss.csv};
+        \end{axis}
+      \end{tikzpicture}
     \end{column}
 
   \end{columns}
