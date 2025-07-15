@@ -168,7 +168,8 @@
 
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
-        \begin{axis}
+        \begin{axis}[title=Результат регрессии,xlabel=$x$,ylabel=$y$,legend
+          entries={Исходная функция,Исходная функция + шум,Предсказание модели}]
           \addplot[blue] table[x=X,y=Y,col sep=comma]
           {linear_regression_1/output.csv};
           \addplot[blue,only marks,mark size=1] table[x=X,y=Ynoise,col
@@ -181,7 +182,8 @@
 
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
-        \begin{axis}
+        \begin{axis}[title=Потери,xlabel=Эпоха,ylabel=MSE,legend
+          entries={Валидация,Обучение}]
           \addplot[blue] table[col sep=comma]
           {linear_regression_1/test_loss.csv};
           \addplot[red] table[col sep=comma]
