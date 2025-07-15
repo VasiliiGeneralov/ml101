@@ -7,11 +7,22 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1,T2A]{fontenc}
 \usepackage{hyperref}
-\hypersetup{colorlinks=true}
+\hypersetup{colorlinks=true,pageanchor=true}
 \usepackage{tikz}
 \usetikzlibrary{fit}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
+
+%%% dude wtf
+\usepackage{fancyvrb}
+\makeatletter
+\def\KV@FV@lastline@default{%
+  \let\FancyVerbStopNum\m@ne
+\let\FancyVerbStopString\relax}
+\fvset{lastline}
+\makeatother
+\usepackage{minted}
+%%%
 
 \def \MinSize {22}
 \def \TikzScale {0.7}
@@ -34,6 +45,10 @@
 
 \begin{document}
 
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
 \section{Модель нейрона}
 
 \begin{frame}{\secname : \subsecname}
@@ -41,6 +56,9 @@
   \begin{columns}
 
     \begin{column}{0.5\textwidth}
+      Биологический нейрон реагирует на спайки~--- импульсы,
+      приходящие на аксоны. Однако, самой удобной моделью оказался
+      линейный сумматор:
       $$ y = \sum_{i}^{} w_i \cdot x_i + b $$
     \end{column}
 
@@ -140,6 +158,11 @@
 \end{frame}
 
 \begin{frame}[fragile]{\secname : \subsecname}
+  \framesubtitle{Описание модели}
+  \inputminted[firstline=19,lastline=25]{python}{linear_regression_1/linear_regression_1.py}
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
   \framesubtitle{Регрессия функции}
   \begin{columns}
 
