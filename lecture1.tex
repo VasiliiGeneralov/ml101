@@ -211,7 +211,8 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
-        \begin{axis}[title=Результат регрессии,xlabel=$x$,ylabel=$y$,legend
+        \begin{axis}[title=Результат регрессии,xlabel={$x$,
+            $^{\circ}$},ylabel=$y$,legend
           entries={Исходная функция,Исходная функция + шум,Предсказание модели}]
           \addplot[blue] table[x=X,y=Y,col sep=comma]
           {linear_regression_2/output.csv};
