@@ -12,8 +12,8 @@ def f(x):
 
 X_MIN = -180
 X_MAX = 180
-EPOCHS = 1000
-SAMPLES = 200
+EPOCHS = 100
+SAMPLES = 100
 
 
 class LR(torch.nn.Module):
