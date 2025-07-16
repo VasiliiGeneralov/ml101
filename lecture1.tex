@@ -238,4 +238,43 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Описание модели}
+  \inputminted[firstline=19,lastline=30]{python}{linear_regression_3/linear_regression_3.py}
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Нелинейность}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=Результат регрессии,xlabel={$x$,
+            $^{\circ}$},ylabel=$y$,legend pos=north west,legend
+            entries={\tiny{Исходная функция},\tiny{Исходная функция +
+          шум},\tiny{Предсказание модели}}]
+          \addplot[blue] table[x=X,y=Y,col sep=comma]
+          {linear_regression_3/output.csv};
+          \addplot[blue,only marks,mark size=1] table[x=X,y=Ynoise,col
+          sep=comma] {linear_regression_3/output.csv};
+          \addplot[red] table[x=X,y=Ypred,col sep=comma]
+          {linear_regression_3/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=Потери,xlabel=Эпоха,ylabel=MSE,legend
+          entries={Валидация,Обучение}]
+          \addplot[blue] table[col sep=comma]
+          {linear_regression_3/test_loss.csv};
+          \addplot[red] table[col sep=comma]
+          {linear_regression_3/train_loss.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 \end{document}
