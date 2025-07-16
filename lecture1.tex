@@ -33,7 +33,6 @@
 \newcommand{\mtx}[1]{\boldsymbol{#1}}
 
 \tikzstyle{fcnode}=[
-  thick,
   draw=black,
   rectangle,
   minimum height=2*\MinSize,
@@ -202,10 +201,8 @@
   \end{columns}
 \end{frame}
 
-\section{Регрессия произвольной функции}
-
 \begin{frame}{\secname : \subsecname}
-  \framesubtitle{Синус}
+  \framesubtitle{Регрессия произвольной функции}
   Проведем регрессию $\sin(x)$:
 
   \begin{columns}
@@ -238,13 +235,121 @@
   \end{columns}
 \end{frame}
 
+\section{Нелинейность}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Активация}
+  Нелинейность в модель добавляет функция активации
+
+  \begin{columns}
+
+    \begin{column}{0.5\textwidth}
+
+      $$
+      y = g\left(\sum_{i}^{} w_i \cdot x_i + b\right)
+      $$
+      где $g(x)$~--- функция активации (Sigmoid, ReLU, $\tanh$, и т.д.)
+
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \begin{tikzpicture}
+          \def \x {3}
+          \def \y {0}
+          \def \xOff {1.75}
+          \def \yOff {1}
+
+          \node[neuron] (n1) at (\x, \y) {$\sum$};
+
+          \node (x1) at (\x - \xOff, \y + \yOff) {$x_1$};
+          \node (x2) at (\x - \xOff, \y) {$x_2$};
+          \node (x3) at (\x - \xOff, \y - \yOff) {$x_3$};
+          \node (b1) at (\x, \y - \yOff) {$b$};
+
+          \node[neuron] (y1) at (\x + 0.75 * \xOff, \y) {$g$};
+          \node (y2) at (\x + 1.4 * \xOff, \y) {};
+
+          \foreach \i in {1,...,3}{
+            \draw (x\i) -- (n1) node[midway,above] {$w_\i$};
+          }
+          \draw (b1) -- (n1);
+
+          \draw (n1) -- (y1);
+          \draw (y1) -- (y2);
+        \end{tikzpicture}
+      \end{center}
+      В некоторых источниках сочетание нейрон/линейный слой +
+      активация называют <<перцептрон>>
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Sigmoid, ReLU}
+
+  \begin{columns}
+
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=Sigmoid,xlabel=$x$,ylabel=$g$,legend
+          entries={$\frac{1}{1+\exp^{-x}}$},legend pos=north west]
+          \addplot[blue] table[x=X,y=Sigmoid,col sep=comma]
+          {activation/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \def \ReLU {$\max(0,x)$}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=ReLU,xlabel=$x$,ylabel=$g$,legend
+          entries={\ReLU},legend pos=north west]
+          \addplot[blue] table[x=X,y=ReLU,col sep=comma]
+          {activation/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{$\tanh$, GELU}
+
+  \begin{columns}
+
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=Sigmoid,xlabel=$x$,ylabel=$g$,legend
+          entries={$\tanh(x)$},legend pos=north west]
+          \addplot[blue] table[x=X,y=tanh,col sep=comma]
+          {activation/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \begin{tikzpicture}[scale=\TikzScale]
+        \begin{axis}[title=GELU,xlabel=$x$,ylabel=$g$,legend
+          entries={$x \cdot \Phi(x)$},legend pos=north west]
+          \addplot[blue] table[x=X,y=GELU,col sep=comma]
+          {activation/output.csv};
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
 \begin{frame}{\secname : \subsecname}
   \framesubtitle{Описание модели}
   \inputminted[firstline=19,lastline=30]{python}{linear_regression_3/linear_regression_3.py}
 \end{frame}
 
 \begin{frame}{\secname : \subsecname}
-  \framesubtitle{Нелинейность}
+  \framesubtitle{Регрессия произвольной функции}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
