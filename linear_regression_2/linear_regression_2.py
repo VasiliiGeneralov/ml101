@@ -48,6 +48,7 @@ if __name__ == "__main__":
         loss = obj(pred, Y_train)
         train_hst.append(float(loss))
         loss.backward()
+        torch.nn.utils.clip_grad_norm_(mod.parameters(), max_norm=1.0)
         opt.step()
 
         pred = mod.forward(X_test)

@@ -211,12 +211,14 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
-        \begin{axis}[title=Входной сигнал,xlabel=$x$,ylabel=$y$,legend
+        \begin{axis}[title=Результат регрессии,xlabel=$x$,ylabel=$y$,legend
           entries={Исходная функция,Исходная функция + шум,Предсказание модели}]
           \addplot[blue] table[x=X,y=Y,col sep=comma]
           {linear_regression_2/output.csv};
           \addplot[blue,only marks,mark size=1] table[x=X,y=Ynoise,col
           sep=comma] {linear_regression_2/output.csv};
+          \addplot[red] table[x=X,y=Ypred,col sep=comma]
+          {linear_regression_2/output.csv};
         \end{axis}
       \end{tikzpicture}
     \end{column}
