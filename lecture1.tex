@@ -116,9 +116,10 @@
     \begin{column}{0.5\textwidth}
       Здесь и далее используются обозначения, принятые в PyTorch:
       $$
-      y = x \cdot \mtx{A}^T + b
+      y = x \cdot \mtx{A}^T + \mtx{b}
       $$
       где $\mtx{A}[O \times I]$~--- матрица обучаемых весов,
+      $\mtx{b}[O]$~--- вектор обучаемых смещений,
       подробнее в
       \href{https://docs.pytorch.org/docs/stable/generated/torch.nn.Linear.html}{документации}
 
