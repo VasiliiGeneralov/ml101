@@ -4,6 +4,8 @@
 \mode<presentation>
 \usetheme{Ilmenau}
 
+\setbeameroption{show notes on second screen}
+
 \author{Василий Генералов \\ VSGeneralov@sberbank.ru}
 \title{Machine Learning 101}
 
@@ -59,12 +61,15 @@
 
 \begin{frame}{\secname : \subsecname}
   \framesubtitle{Сумматор}
+
+  \note{Биологический нейрон реагирует на спайки~--- импульсы,
+    приходящие на аксоны, но импульсное поведение сложно моделировать.
+    Самой удобной моделью оказался линейный сумматор. Множество $w_i$
+  принято называть весами нейрона, а свободный член $b$~--- смещением.}
+
   \begin{columns}
 
     \begin{column}{0.5\textwidth}
-      Биологический нейрон реагирует на спайки~--- импульсы,
-      приходящие на аксоны. Однако, самой удобной моделью оказался
-      линейный сумматор:
       $$ y = \sum_{i}^{} w_i \cdot x_i + b $$
     \end{column}
 
