@@ -497,4 +497,20 @@
   где $\eta$~--- скорость обучения (learning rate, lr в PyTorch)
 \end{frame}
 
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{SGD и модификации}
+
+  Описанный выше метод~--- это Stochastic Gradient Descent.
+  Существуют улучшения данного подхода:
+  \begin{itemize}
+    \item Дополнительный расчет производных более высокого порядка
+      (гессиан), трудно вычислим для больших датасетов
+    \item Запоминание истории изменений, т.н. накопление <<импульса>>
+  \end{itemize}
+
+  Ко второму классу относятся оптимизаторы Adam, Adagrad, Rprop и
+  т.д. Более подробную информацию можно найти в
+  \href{https://habr.com/ru/articles/318970/}{статье}
+\end{frame}
+
 \end{document}
