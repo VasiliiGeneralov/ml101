@@ -17,6 +17,7 @@
 \usetikzlibrary{fit}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
+\usepackage{amsmath}
 
 %%% dude wtf
 \usepackage{fancyvrb}
@@ -32,7 +33,9 @@
 \def \MinSize {22}
 \def \TikzScale {0.7}
 
+\DeclareMathOperator*{\argmin}{argmin}
 \newcommand{\mtx}[1]{\boldsymbol{#1}}
+\newcommand{\Loss}{\mathcal{L}}
 
 \tikzstyle{fcnode}=[
   draw=black,
@@ -338,7 +341,7 @@
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
         \begin{axis}[title=Sigmoid,xlabel=$x$,ylabel=$g$,legend
-          entries={$\frac{1}{1+\exp^{-x}}$},legend pos=north west]
+          entries={$\frac{1}{1+ e^{-x}}$},legend pos=north west]
           \addplot[blue] table[x=X,y=Sigmoid,col sep=comma]
           {activation/output.csv};
         \end{axis}
@@ -405,12 +408,61 @@
 \section{Обучение}
 
 \begin{frame}{\secname : \subsecname}
-	\framesubtitle{Простейший цикл}
-	\inputminted[firstline=42,lastline=50]{python}{linear_regression_1/linear_regression_1.py}
+  \framesubtitle{Простейший цикл}
+  \inputminted[firstline=42,lastline=50]{python}{linear_regression_1/linear_regression_1.py}
 \end{frame}
 
 \begin{frame}{\secname : \subsecname}
-	\framesubtitle{Функция потерь}
+  \framesubtitle{Функция потерь}
+  Критерий обученности модели~--- значение функции потерь $\Loss$.
+  Задача обучающего цикла~--- минимизация ее значения:
+  $$
+  \argmin_{\mtx{W}}\Loss\left(\mtx{Y}^{\ell},\mtx{Y}\left(\mtx{X},\mtx{W}\right)\right)
+  $$
+  где $\mtx{Y}^{\ell}$~--- истинное значение из датасета,
+  $\mtx{Y}$~--- предсказание модели, $\mtx{X}$, $\mtx{W}$~--- входные
+  данные и обученные веса модели
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{MSE, MAE}
+  Для задач регрессии используются Mean Squared Error Loss:
+  $$
+  MSELoss = \frac{1}{n}\cdot\sum_{i}^{n}\left(y^{\ell}_i - y_i\right)
+  $$
+  и Mean Absolute Error Loss:
+  $$
+  L1Loss = \frac{1}{n} \cdot \sum_{i}^{n}\lvert y^{\ell}_i - y_i\rvert
+  $$
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Cross Entropy, BCE}
+  В задачах классификации применяется Cross Entropy Loss:
+  $$
+  CrossEntropyLoss = -\sum_{i}^{c} y^{\ell}_i \cdot \log\frac{e^{y_{i}}}{
+  \sum_{j}^{c} e^{y_{j}}}
+  $$
+  Частный случай~--- Binary Cross Entropy:
+  $$
+  BCELoss = -\left( y^{\ell}_i \cdot \log \left( y_i \right) + \left(
+  1-y^{\ell}_i \right) \cdot \log \left(1 - y_i \right) \right)
+  $$
+\end{frame}
+
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Другие функции потерь}
+  \begin{itemize}
+    \item \textbf{MSELoss}
+    \item \textbf{L1Loss}
+    \item \textbf{CrossEntropyLoss}
+    \item \textbf{BCELoss}
+    \item CTCLoss
+    \item NLLLoss
+    \item PoissonNLLLoss
+    \item больше в
+      \href{https://docs.pytorch.org/docs/stable/nn.html\#loss-functions}{документации}
+  \end{itemize}
 \end{frame}
 
 \end{document}
