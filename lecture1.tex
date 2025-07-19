@@ -483,4 +483,18 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{\secname : \subsecname}
+  \framesubtitle{Градиент}
+  Для задачи минимизации:
+  $$
+  \argmin_{\mtx{W}}\Loss\left(\mtx{X},\mtx{W}\right)
+  $$
+
+  Обновление $\mtx{W}$ вычисляется как:
+  $$
+  \mtx{W}^{t+1} = \mtx{W}^t - \eta \cdot \frac{\partial\Loss}{\partial\mtx{W}}
+  $$
+  где $\eta$~--- скорость обучения (learning rate, lr в PyTorch)
+\end{frame}
+
 \end{document}
