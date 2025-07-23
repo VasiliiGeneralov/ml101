@@ -550,8 +550,8 @@
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
         \begin{axis}[xlabel=$x$,ylabel=$y$]
-          \addplot[blue] table[x=X,y=P2d,col sep=comma]
-          {optimization_1/output.csv};
+          \addplot[blue] table[col sep=comma]
+          {optimization_1/output2d.csv};
           \node[draw=red,circle,fill=red] at (-5, 25) {};
         \end{axis}
       \end{tikzpicture}
@@ -560,7 +560,8 @@
     \begin{column}{0.5\textwidth}
       \begin{tikzpicture}[scale=\TikzScale]
         \begin{axis}[xlabel=$x$,ylabel=$y$,zlabel=$z$]
-          \addplot3[surf,shader=interp,domain=-10:10] {x^2 + y^2};
+          \addplot3[surf,mesh/rows=50,shader=interp] table[col
+          sep=comma] {optimization_1/output3d.csv};
           \node[circle,draw=red,fill=red] at (-5, -5, 50) {};
         \end{axis}
       \end{tikzpicture}
